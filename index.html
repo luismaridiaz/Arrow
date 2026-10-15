@@ -5,16 +5,16 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Entrenador Piper Arrow III — Escuela de vuelo</title>
 <link rel="manifest" href="manifest.json">
-<meta name="theme-color" content="#080c14">
+<meta name="theme-color" content="#0a0a0c">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
 <link rel="apple-touch-icon" href="icon-192.png">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js" crossorigin="anonymous"></script>
 <style>
 :root{
-  --bg:#080c14; --panel:#0f1724; --panel2:#0b1220;
-  --ink:#e8edf5; --ink2:#7f90ad; --accent:#4fc3f7; --accent2:#f0b429;
-  --ok:#3ddc84; --warn:#ffd54f; --bad:#ff5c5c; --bd:#22314a;
+  --bg:#0a0a0c; --panel:#18181c; --panel2:#121215;
+  --ink:#efeae2; --ink2:#9a9388; --accent:#ff6b3d; --accent2:#f0b429;
+  --ok:#3ddc84; --warn:#ffd54f; --bad:#ff5c5c; --bd:#36363d;
   --mono:ui-monospace,SFMono-Regular,Consolas,monospace;
 }
 *{box-sizing:border-box;margin:0;padding:0}
@@ -27,7 +27,7 @@ body{
 }
 
 /* ---------- ESCENARIO 3D ---------- */
-#stage{flex:1 1 auto; position:relative; min-height:0; background:#05070d}
+#stage{flex:1 1 auto; position:relative; min-height:0; background:#050506}
 #cockpitWrap{position:absolute; inset:0; overflow:hidden}
 #glCanvas{position:absolute; inset:0; width:100%; height:100%; display:block}
 #hudCanvas{position:absolute; inset:0; width:100%; height:100%; display:block; pointer-events:none}
@@ -37,27 +37,27 @@ body{
   position:absolute; left:50%; bottom:8px; transform:translateX(-50%);
   display:grid; grid-template-columns:repeat(8,auto); gap:6px;
   padding:7px 9px; border-radius:12px;
-  background:linear-gradient(180deg,rgba(10,16,26,.80),rgba(6,10,16,.92));
-  border:1px solid #23334d; box-shadow:0 8px 28px rgba(0,0,0,.65), inset 0 1px 0 rgba(255,255,255,.05);
+  background:linear-gradient(180deg,rgba(18,18,20,.82),rgba(8,8,10,.94));
+  border:1px solid #3a3a42; box-shadow:0 8px 28px rgba(0,0,0,.65), inset 0 1px 0 rgba(255,255,255,.05);
   backdrop-filter:blur(6px); z-index:5;
 }
 .gauge{position:relative; text-align:center; width:77.5px}
 .gauge canvas{width:77.5px; height:77.5px; display:block; border-radius:50%}
 .gauge span{
   display:block; margin-top:1px; font:700 8px/1 var(--mono);
-  letter-spacing:.6px; color:#7f90ad;
+  letter-spacing:.6px; color:#9a9388;
 }
 
 /* ---------- MAPA ---------- */
 #mapBox{
   position:absolute; right:8px; top:8px; width:264px; height:186px;
-  border-radius:10px; overflow:hidden; border:1px solid #23334d;
-  background:#0b1220; box-shadow:0 6px 20px rgba(0,0,0,.6); z-index:6;
+  border-radius:10px; overflow:hidden; border:1px solid #3a3a42;
+  background:#121215; box-shadow:0 6px 20px rgba(0,0,0,.6); z-index:6;
 }
 #mapCanvas{width:100%; height:100%; display:block}
 #mapInfo{
   position:absolute; left:6px; bottom:4px; font:700 9px var(--mono);
-  color:#9fb4d0; text-shadow:0 1px 2px #000; pointer-events:none;
+  color:#c9c2b6; text-shadow:0 1px 2px #000; pointer-events:none;
 }
 #mapToggle{
   position:absolute; right:8px; top:200px; z-index:7;
@@ -67,12 +67,12 @@ body{
 /* ---------- PANEL DE MANDOS ---------- */
 #panel{
   flex:0 0 auto; max-height:47vh; overflow:hidden; display:flex; flex-direction:column;
-  background:linear-gradient(180deg,#0f1724,#0a101c);
+  background:linear-gradient(180deg,#18181c,#101013);
   border-top:1px solid var(--bd); padding:8px 10px 12px;
   box-shadow:0 -6px 24px rgba(0,0,0,.5);
 }
 .grid::-webkit-scrollbar{width:8px}
-.grid::-webkit-scrollbar-thumb{background:#22314a; border-radius:4px}
+.grid::-webkit-scrollbar-thumb{background:#36363d; border-radius:4px}
 
 .grid{display:flex; gap:10px; flex-wrap:wrap; align-items:stretch; overflow-y:auto; overflow-x:hidden; min-height:0; flex:1 1 auto}
 .col{flex:1 1 250px; min-width:220px; display:flex; flex-direction:column; gap:7px}
@@ -89,25 +89,25 @@ body{
 
 button{
   flex:1 1 auto; min-width:56px; padding:8px 6px; border-radius:6px;
-  border:1px solid var(--bd); background:#0a1220; color:var(--ink2);
+  border:1px solid var(--bd); background:#0f0f12; color:var(--ink2);
   font:700 10px var(--mono); cursor:pointer; letter-spacing:.3px;
   transition:background .12s, color .12s, border-color .12s, transform .06s;
 }
-button:hover{background:#132136; color:#b9cbe4}
+button:hover{background:#25252b; color:#e6ddd0}
 button:active{transform:scale(.97)}
-button.on{background:rgba(79,195,247,.18); color:var(--accent); border-color:var(--accent); box-shadow:0 0 10px rgba(79,195,247,.25) inset}
+button.on{background:rgba(255,107,61,.18); color:var(--accent); border-color:var(--accent); box-shadow:0 0 10px rgba(255,107,61,.25) inset}
 button.warn.on{background:rgba(255,92,92,.2); color:var(--bad); border-color:var(--bad)}
 
 /* Yoke */
 .yokeArea{
   position:relative; width:100%; height:104px; border-radius:9px;
-  background:radial-gradient(ellipse at 50% 30%, #142033, #080e18);
+  background:radial-gradient(ellipse at 50% 30%, #222228, #0a0a0d);
   border:1px solid var(--bd); overflow:hidden; touch-action:none; cursor:grab;
 }
 .yokeArea:active{cursor:grabbing}
 .yokeArea::after{
   content:'YOKE — arrastra'; position:absolute; left:0; right:0; bottom:3px;
-  text-align:center; font:700 8px var(--mono); color:#33465f; letter-spacing:1px;
+  text-align:center; font:700 8px var(--mono); color:#55524d; letter-spacing:1px;
 }
 #yokeVisual{
   position:absolute; inset:0; display:flex; align-items:center; justify-content:center;
@@ -118,12 +118,12 @@ button.warn.on{background:rgba(255,92,92,.2); color:var(--bad); border-color:var
 /* Pedales */
 .pedalArea{
   position:relative; width:100%; height:70px; border-radius:9px;
-  background:radial-gradient(ellipse at 50% 30%, #142033, #080e18);
+  background:radial-gradient(ellipse at 50% 30%, #222228, #0a0a0d);
   border:1px solid var(--bd); overflow:hidden; touch-action:none; cursor:ew-resize;
 }
 .pedalArea::after{
   content:'TIMÓN'; position:absolute; left:0; right:0; bottom:3px;
-  text-align:center; font:700 8px var(--mono); color:#33465f; letter-spacing:1px;
+  text-align:center; font:700 8px var(--mono); color:#55524d; letter-spacing:1px;
 }
 .pedal{
   position:absolute; bottom:14px; width:34px; height:40px; border-radius:5px;
@@ -148,7 +148,7 @@ button.warn.on{background:rgba(255,92,92,.2); color:var(--bad); border-color:var
 .lever-knob{
   position:absolute; left:50%; width:22px; height:22px; margin-left:-11px; border-radius:50%;
   background:radial-gradient(circle at 35% 30%, #7fd6ff, #2a8fc0);
-  border:2px solid #06101c; box-shadow:0 0 10px rgba(79,195,247,.55);
+  border:2px solid #06101c; box-shadow:0 0 10px rgba(255,107,61,.55);
   will-change:bottom;
 }
 .lever.lever-flap .lever-fill{background:linear-gradient(180deg,#a78bfa,#4c2f9e); opacity:.35}
@@ -161,7 +161,7 @@ button.warn.on{background:rgba(255,92,92,.2); color:var(--bad); border-color:var
 /* Telemetría */
 .tel{display:grid; grid-template-columns:repeat(3,1fr); gap:5px}
 .tel div{
-  background:#0a1220; border:1px solid #1b2a41; border-radius:5px;
+  background:#0f0f12; border:1px solid #1b2a41; border-radius:5px;
   padding:4px 5px; text-align:center;
 }
 .tel b{display:block; font:700 14px/1.1 var(--mono); color:var(--accent)}
@@ -188,7 +188,7 @@ button.warn.on{background:rgba(255,92,92,.2); color:var(--bad); border-color:var
 #lessonBox{
   position:absolute; left:8px; top:8px; width:min(268px, calc(100vw - 196px)); z-index:9;
   max-height:calc(100% - 100px); overflow-y:auto;
-  background:rgba(8,13,22,.88); border:1px solid #23334d; border-radius:10px;
+  background:rgba(8,13,22,.88); border:1px solid #3a3a42; border-radius:10px;
   padding:7px 8px; backdrop-filter:blur(6px); box-shadow:0 6px 20px rgba(0,0,0,.55);
 }
 #lsHead{display:flex; align-items:center; justify-content:space-between; gap:6px}
@@ -196,7 +196,7 @@ button.warn.on{background:rgba(255,92,92,.2); color:var(--bad); border-color:var
 #lsToggle{flex:0 0 auto; min-width:26px; padding:3px 6px; font-size:11px}
 #lessonBox.min #lsBody{display:none}
 #lsSel{
-  width:100%; margin-top:6px; padding:5px; border-radius:5px; background:#0a1220; color:var(--ink);
+  width:100%; margin-top:6px; padding:5px; border-radius:5px; background:#0f0f12; color:var(--ink);
   border:1px solid var(--bd); font:700 10px var(--mono);
 }
 #lsBrief{margin-top:6px; font:11px/1.45 system-ui,sans-serif; color:#c5d3e8}
@@ -207,8 +207,8 @@ button.warn.on{background:rgba(255,92,92,.2); color:var(--bad); border-color:var
   display:grid; grid-template-columns:10px 1fr auto; gap:6px; align-items:center;
   padding:3px 4px; border-radius:4px; font:700 9px var(--mono); color:var(--ink2);
 }
-#lsCrit li i{width:8px; height:8px; border-radius:50%; background:#33465f}
-#lsCrit li em{font-style:normal; color:#9fb4d0}
+#lsCrit li i{width:8px; height:8px; border-radius:50%; background:#55524d}
+#lsCrit li em{font-style:normal; color:#c9c2b6}
 #lsCrit li.ok i{background:var(--ok)} #lsCrit li.ok em{color:var(--ok)}
 #lsCrit li.bad i{background:var(--bad)} #lsCrit li.bad em{color:var(--bad)}
 #lsCrit li.note{display:block; color:var(--warn)}
@@ -216,7 +216,7 @@ button.warn.on{background:rgba(255,92,92,.2); color:var(--bad); border-color:var
 #pauseTag{
   display:none; position:absolute; left:50%; top:30%; transform:translateX(-50%); z-index:10;
   padding:6px 18px; border-radius:6px; font:800 14px var(--mono); letter-spacing:3px;
-  background:rgba(79,195,247,.14); color:var(--accent); border:1px solid var(--accent); pointer-events:none;
+  background:rgba(255,107,61,.14); color:var(--accent); border:1px solid var(--accent); pointer-events:none;
 }
 #debrief{
   display:none; position:absolute; inset:0; z-index:20; align-items:center; justify-content:center;
@@ -233,15 +233,15 @@ button.warn.on{background:rgba(255,92,92,.2); color:var(--bad); border-color:var
   display:grid; grid-template-columns:10px 1fr; gap:2px 8px; padding:5px 0;
   border-top:1px solid #1b2a41; font:10px var(--mono);
 }
-.dbRow i{grid-row:span 3; width:8px; height:8px; border-radius:50%; margin-top:3px; background:#33465f}
+.dbRow i{grid-row:span 3; width:8px; height:8px; border-radius:50%; margin-top:3px; background:#55524d}
 .dbRow.ok i{background:var(--ok)} .dbRow.bad i{background:var(--bad)}
-.dbRow b{color:var(--ink)} .dbRow span{color:var(--ink2)} .dbRow em{font-style:normal; color:#9fb4d0}
+.dbRow b{color:var(--ink)} .dbRow span{color:var(--ink2)} .dbRow em{font-style:normal; color:#c9c2b6}
 #dbTips h4{font:800 10px var(--mono); color:var(--accent2); margin:8px 0 3px}
 #dbTips ul{margin-left:16px; font:11px/1.45 system-ui,sans-serif; color:#c5d3e8}
 #dbTips p{font:11px/1.45 system-ui,sans-serif; color:#c5d3e8}
 .dbCard .row{margin-top:10px}
 .vgrid{display:grid; grid-template-columns:repeat(5,1fr); gap:4px}
-.vgrid div{background:#0a1220; border:1px solid #1b2a41; border-radius:5px; padding:3px 2px; text-align:center}
+.vgrid div{background:#0f0f12; border:1px solid #1b2a41; border-radius:5px; padding:3px 2px; text-align:center}
 .vgrid b{display:block; font:700 12px var(--mono); color:var(--accent2)}
 .vgrid span{font:700 7px var(--mono); color:var(--ink2); letter-spacing:.3px}
 
@@ -296,10 +296,10 @@ button.warn.on{background:rgba(255,92,92,.2); color:var(--bad); border-color:var
   display:none; position:absolute; left:50%; top:50%; width:var(--ring,88px); height:var(--ring,88px);
   margin:calc(var(--ring,88px) / -2) 0 0 calc(var(--ring,88px) / -2); border-radius:50%;
   border:2px solid #2f4b70; pointer-events:none;
-  background:radial-gradient(circle at 50% 40%, #182841, #0a1220);
-  box-shadow:inset 0 0 16px rgba(79,195,247,.18), 0 0 0 4px rgba(47,75,112,.25);
+  background:radial-gradient(circle at 50% 40%, #182841, #0f0f12);
+  box-shadow:inset 0 0 16px rgba(255,107,61,.18), 0 0 0 4px rgba(47,75,112,.25);
 }
-#stickRing::before,#stickRing::after{content:''; position:absolute; background:rgba(79,195,247,.16)}
+#stickRing::before,#stickRing::after{content:''; position:absolute; background:rgba(255,107,61,.16)}
 #stickRing::before{left:50%; top:8%; bottom:8%; width:1px}
 #stickRing::after{top:50%; left:8%; right:8%; height:1px}
 #stickKnob{
@@ -359,6 +359,8 @@ button.warn.on{background:rgba(255,92,92,.2); color:var(--bad); border-color:var
 #navInfo{font:700 9px var(--mono); color:var(--ink2); margin:4px 0; text-align:center}
 .gearRow{display:flex; gap:6px; align-items:center; margin-top:5px}
 #btnGear{flex:1 1 auto; min-width:0; padding:7px 4px; font-size:10px}
+#btnAuto{flex:0 0 auto; min-width:0; padding:7px 6px; font-size:9px}
+#btnAuto.ovr{color:var(--warn); border-color:var(--warn); background:rgba(255,213,79,.12)}
 #gearLights{display:flex; gap:3px; align-items:center}
 .glt{width:14px; height:14px; border-radius:50%; background:#12261f; border:1px solid #2a4a40; display:inline-block}
 .glt.on{background:#3ddc84; box-shadow:0 0 8px #3ddc84}
@@ -368,6 +370,12 @@ button.warn.on{background:rgba(255,92,92,.2); color:var(--bad); border-color:var
 .sysGrid button{padding:7px 2px; font-size:9px}
 #sysState{font:800 10px var(--mono); margin-top:6px; text-align:center}
 @media(max-width:520px){ #dbCharts{grid-template-columns:1fr} #radioBox{top:auto; bottom:84px; transform:none; right:6px} #coach{bottom:84px} }
+
+/* aspecto Piper Arrow: panel grafito mate y filete rojo de la librea */
+#panel{border-top:3px solid #c0301c; background:repeating-linear-gradient(90deg,rgba(255,255,255,.012) 0 2px,transparent 2px 4px),linear-gradient(180deg,#1b1b1f,#0e0e11)}
+#gaugePanel{border:1px solid #4a4a52; border-bottom:2px solid #c0301c}
+.card{background:linear-gradient(180deg,#151518,#0f0f12)}
+.card h4{border-left:3px solid #c0301c; padding-left:6px}
 </style>
 </head>
 <body>
@@ -496,6 +504,7 @@ button.warn.on{background:rgba(255,92,92,.2); color:var(--bad); border-color:var
         </div>
         <div class="gearRow">
           <button id="btnGear">TREN ▼ ABAJO</button>
+          <button id="btnAuto" title="Extensión automática del tren (IAS baja + potencia baja). Pulsa para anularla (override)">AUTO</button>
           <div id="gearLights" title="3 verdes = abajo y bloqueado · roja = en tránsito / no seguro">
             <i class="glt" id="glN"></i><i class="glt" id="glL"></i><i class="glt" id="glR"></i><i class="glt red" id="glU"></i>
           </div>
@@ -699,7 +708,7 @@ const P = {
   Mrot: 3300,            // momento de cabeceo necesario para levantar la rueda de morro (N·m)
   // velocidades de referencia (kt)
   Vs0: 55, Vs1: 60, Vr: 63, Vx: 78, Vy: 90, Vglide: 79, Vapp: 70, Vfe: 103, Va: 112, Vno: 146, Vne: 183,
-  Vle: 129, VloDn: 129, VloUp: 107
+  Vle: 129, VloDn: 129, VloUp: 107, autoV: 88, autoMP: 14.5
 };
 P.gearSag = P.m*P.g/P.gearK;           // compresión estática
 P.yRest   = P.gearH - P.gearSag;        // altura del CG en reposo sobre el suelo
@@ -787,7 +796,7 @@ class Aircraft {
     this.sys = { battery:!o.cold, mag:o.cold?'OFF':'BOTH', altAir:false, starter:false,
                  fuelPump:!!o.pump, fuelSel:(o.cold?'OFF':(o.sel||'L')), prime:0,
                  engineOn:!o.cold, ice:0, humid, startT:0, cold:!!o.cold, cough:0,
-                 starve:0, starveStop:false, gearEmerg:false };
+                 starve:0, starveStop:false, gearEmerg:false, autoOvr:!!o.ovr, autoCount:0 };
     if(o.cold){ this.rpm = 0; c.mixture = 1; this.mp = 29; }
     this.gust = { x:0, z:0, y:0 };
     this.windEff = this.windAt((o.ground ? 0 : (o.altFt||2000))/FT);
@@ -905,6 +914,11 @@ class Aircraft {
 
     /* --- tren: palanca, hidráulica, bloqueo en tierra y límites de velocidad --- */
     {
+      /* extensión automática: selector arriba + IAS baja + potencia baja en vuelo → tren abajo (anulable) */
+      if(c.gear < 0.5 && !sy.autoOvr && !sy.gearEmerg && this.gearPos < 0.999 && iasKt < P.autoV && this.mp < P.autoMP
+         && this.y > this.contactH() + 0.3 && sy.battery){
+        c.gear = 1; sy.autoCount++;
+      }
       const g0 = this.gearPos, want = c.gear > 0.5 ? 1 : 0;
       const squat = this.y < this.contactH() + 0.03;               // amortiguadores comprimidos
       const hyd = sy.battery && !this.gearFail && !this.gearDamaged;
@@ -1165,7 +1179,7 @@ class Aircraft {
       fuel: this.fuelL + this.fuelR, fuelL: this.fuelL, fuelR: this.fuelR,
       throttle: this.controls.throttle, prop: this.controls.prop, mixture: this.controls.mixture,
       flap: this.controls.flap,
-      gearPos: this.gearPos, gearCmd: this.controls.gear, gearWarn: this.gearWarn,
+      gearPos: this.gearPos, gearCmd: this.controls.gear, autoOvr: this.sys.autoOvr, autoCount: this.sys.autoCount, gearWarn: this.gearWarn,
       gearOver: this.gearOver, gearDamaged: this.gearDamaged, gearFail: this.gearFail,
       bellyLanding: this.bellyLanding,
       onGround: this.y < this.contactH(),
@@ -1335,7 +1349,7 @@ function updatePapi(st){
 const acModel = new THREE.Group();
 (function buildModel(){
   const white = new THREE.MeshLambertMaterial({ color:0xeceff3 });
-  const blue  = new THREE.MeshLambertMaterial({ color:0x1f4e8c });
+  const blue  = new THREE.MeshLambertMaterial({ color:0xb3261e });
   const dark  = new THREE.MeshLambertMaterial({ color:0x2a3038 });
   const glass = new THREE.MeshLambertMaterial({ color:0x2e5c86 });
   const leg   = new THREE.MeshLambertMaterial({ color:0x9aa2ad });
@@ -3282,6 +3296,12 @@ function sysUpdateUI(st){
   const gp = st.gearPos, gc = st.gearCmd > 0.5;
   $('btnGear').textContent = gc ? 'TREN ▼ ABAJO' : 'TREN ▲ ARRIBA';
   $('btnGear').classList.toggle('on', gc);
+  $('btnAuto').textContent = s.autoOvr ? 'AUTO ✕' : 'AUTO';
+  $('btnAuto').classList.toggle('ovr', s.autoOvr);
+  if(s.autoCount !== sysUpdateUI._ac){
+    if(sysUpdateUI._ac != null && s.autoCount > sysUpdateUI._ac) Coach.show('Extensión automática: IAS y potencia bajas → tren abajo. Anúlala con AUTO si practicas vuelo lento con tren arriba','warn');
+    sysUpdateUI._ac = s.autoCount;
+  }
   const down = gp >= 0.999;
   ['glN','glL','glR'].forEach(id=> $(id).classList.toggle('on', down));
   const unsafe = (gp > 0.001 && gp < 0.999) || (gc && gp < 0.999) || (!gc && gp > 0.001);
@@ -3503,8 +3523,8 @@ function approachLesson(o){
     done:(st,L)=>st.altFt<=2500 || L.te>=300 };
 
   /* ---------- 7 · Mejor planeo ---------- */
-  const planeo = { id:'planeo', title:'Descenso y mejor planeo (79 kt)', scene:sc({ altFt:4000, ias:79, prop:0.25, thr:0 }), wind:[0,0], grace:6, noSinkCoach:true, noGearCoach:true,
-    brief:'Gas a ralentí, tren y flaps arriba, hélice atrás. Mantén <b>79 kt</b> (mejor planeo) y rumbo 020° hasta <b>2000 ft</b>.',
+  const planeo = { id:'planeo', title:'Descenso y mejor planeo (79 kt)', scene:sc({ altFt:4000, ias:79, prop:0.25, thr:0, ovr:true }), wind:[0,0], grace:6, noSinkCoach:true, noGearCoach:true,
+    brief:'<i>(Extensión automática anulada en esta práctica.)</i> Gas a ralentí, tren y flaps arriba, hélice atrás. Mantén <b>79 kt</b> (mejor planeo) y rumbo 020° hasta <b>2000 ft</b>.',
     steps:['Morro: fija 79 kt y compensa','Hélice atrás (menos rpm) reduce la resistencia de la hélice','Tren y flaps arriba hasta tener la pista asegurada: con tren abajo el planeo cae de ~10:1 a ~8:1'],
     crit:[ cIas(79,5,.75), cHdg(10,.8),
       mkClamp('cfg','Configuración limpia','tren y flaps arriba · hélice atrás',.9,()=>true, st=>st.gearPos<0.05 && st.flap<0.05 && st.prop<0.4,
@@ -3950,6 +3970,7 @@ function boot(){
   $('sysEmerg').onclick= ()=>{ if(ac.gearPos < 1){ ac.sys.gearEmerg = true; ac.controls.gear = 1; Coach.show('Extensión de emergencia: el tren cae por gravedad (~9 s)','good'); } };
   $('sysFill').onclick = ()=>{ ac.fuelL = TANK_L; ac.fuelR = TANK_L; Coach.show('Depósitos llenos (136 L cada uno)','good'); };
   $('btnGear').onclick = ()=> toggleGear();
+  $('btnAuto').onclick = ()=>{ ac.sys.autoOvr = !ac.sys.autoOvr; Coach.show(ac.sys.autoOvr ? 'Override: extensión automática ANULADA' : 'Extensión automática activa (IAS < 88 kt y MP < 14,5")', 'good'); };
   const st0 = $('sysStart');
   st0.style.touchAction = 'manipulation';
   st0.addEventListener('click', ()=>{

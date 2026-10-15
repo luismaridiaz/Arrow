@@ -7,5 +7,5 @@ Publicar: sube la carpeta entera a Netlify Drop / GitHub Pages / Vercel (index.h
 ## Límites (honestos)
 - Modelo simplificado, NO validado contra un avión real. Inercias y geometría del tren estimadas.
 - Ascenso ~10–15 % mejor que el POH; crucero ~6 % lento; despegue sobre 50 ft ~1900 ft (POH ~1600).
-- No modela extensión automática del tren. Valores de procedimiento didácticos: verifícalos con tu POH.
+- Extensión automática del tren modelada de forma didáctica: selector arriba + IAS < 88 kt + MP < 14,5" en vuelo → tren abajo (botón AUTO = override). Los umbrales son una aproximación mía, no cifras del POH. Valores de procedimiento didácticos: verifícalos con tu POH.
 - Solo para aprender procedimientos y sensaciones; no sustituye instrucción real.
